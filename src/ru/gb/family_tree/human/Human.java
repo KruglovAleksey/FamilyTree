@@ -1,12 +1,13 @@
-package ru.gb.family_tree;
+package ru.gb.family_tree.human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Human {
+public class Human implements Serializable {
     private static final AtomicInteger count = new AtomicInteger(1);
     private Integer id;
     private String name;

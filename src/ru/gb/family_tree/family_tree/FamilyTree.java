@@ -1,9 +1,12 @@
-package ru.gb.family_tree;
+package ru.gb.family_tree.family_tree;
 
+import ru.gb.family_tree.human.Human;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree{
+public class FamilyTree implements Serializable {
     private List<Human> listTree;
 
     public FamilyTree() {
@@ -27,7 +30,7 @@ public class FamilyTree{
     }
     private  void addToChildren(Human human){
         for (Human child: human.getChildren()){
-            child.addChildren(human);
+            child.addParent(human);
         }
     }
 
@@ -71,4 +74,5 @@ public class FamilyTree{
     public String toString() {
         return printListTree();
     }
+
 }
