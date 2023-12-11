@@ -4,9 +4,10 @@ import ru.gb.family_tree.human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> listTree;
 
     public FamilyTree() {
@@ -70,9 +71,21 @@ public class FamilyTree implements Serializable {
         }
         return sb.toString();
     }
+
+    public void sortByName(){
+        listTree.sort(new FamilyTreeComparatorByName());
+    }
+    public void sortByAge(){
+        listTree.sort(new FamilyTreeComparatorByAge());
+    }
+
     @Override
     public String toString() {
         return printListTree();
     }
 
+    @Override
+    public Iterator<Human> iterator() {
+        return new TreeIterator(listTree);
+    }
 }

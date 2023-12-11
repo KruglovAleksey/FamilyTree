@@ -10,11 +10,16 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException{
-        FamilyTree tree = loadTree();
-        //FamilyTree tree = Tree();
+        //FamilyTree tree = loadTree();
+        FamilyTree tree = Tree();
         System.out.println(tree);
-        saveTree(tree);
+        //saveTree(tree);
 
+        //tree.sortByName();
+        //System.out.println(tree);
+
+        tree.sortByAge();
+        System.out.println(tree);
     }
 
     static FamilyTree Tree(){
@@ -24,9 +29,9 @@ public class Main {
         Human aleksey = new Human("Алексей", Gender.Male, LocalDate.of(1990, 4, 19));
         ira.addChildren(aleksey);
         vadim.addChildren(aleksey);
+        tree.addHuman(ira);
         tree.addHuman(aleksey);
         tree.addHuman(vadim);
-        tree.addHuman(ira);
         return tree;
     }
     private static void saveTree(FamilyTree tree) throws IOException {
