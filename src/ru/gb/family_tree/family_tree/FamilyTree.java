@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> listTree;
+public class FamilyTree<E extends  FamilyTreeItem<E>> implements Serializable, Iterable<E> {
+    private List<E> listTree;
 
     public FamilyTree() {
         listTree = new ArrayList<>();
     }
-    public FamilyTree(List<Human> listTree) {this.listTree = listTree;}
+    public FamilyTree(List<E> listTree) {this.listTree = listTree;}
 
-    public boolean addHuman(Human human){
+    public boolean addHuman(E human){
         if(!listTree.contains(human)) {
             listTree.add(human);
             addToParents(human);
@@ -24,22 +24,22 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         }
         return false;
     }
-    private void addToParents(Human human){
-        for (Human parent: human.getParents()){
-            parent.addChildren(human);
+    private void addToParents(E human){
+        for (E parent: human.getParents()){
+            parent.addChild(human);
         }
     }
-    private  void addToChildren(Human human){
-        for (Human child: human.getChildren()){
+    private  void addToChildren(E human){
+        for (E child: human.getChildren()){
             child.addParent(human);
         }
     }
 
-    public List<Human> getByName(String name){
-        List<Human> humans = new ArrayList<>();
-        for(Human human: listTree){
-            if(human.getName().equals(name)){
-                humans.add(human);
+    public List<E> getByName(String name){
+        List<E> humans = new ArrayList<>();
+        for(E e: listTree){
+            if(e.getName().equals(name)){
+                humans.add(e);
             }
         }
         return humans;
@@ -48,13 +48,13 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     private boolean checkId(int id){
         return id>=0;
     }
-    public Human getById(int id){
+    public E getById(int id){
         if(checkId(id)){
             return null;
         }
-        for(Human human: listTree){
-            if (human.getId() == id){
-                return human;
+        for(E e: listTree){
+            if (e.getId() == id){
+                return e;
             }
         }
         return null;
@@ -65,18 +65,18 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         sb.append("В дереве ");
         sb.append(listTree.size());
         sb.append(" людей: \n");
-        for(Human human: listTree){
-            sb.append(human);
+        for(E e: listTree){
+            sb.append(e);
             sb.append("\n");
         }
         return sb.toString();
     }
 
     public void sortByName(){
-        listTree.sort(new FamilyTreeComparatorByName());
+        listTree.sort(new FamilyTreeComparatorByName<>());
     }
     public void sortByAge(){
-        listTree.sort(new FamilyTreeComparatorByAge());
+        listTree.sort(new FamilyTreeComparatorByAge<>());
     }
 
     @Override
@@ -85,7 +85,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new TreeIterator(listTree);
+    public Iterator<E> iterator() {
+        return new TreeIterator<>(listTree);
     }
 }

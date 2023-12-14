@@ -1,5 +1,7 @@
 package ru.gb.family_tree.human;
 
+import ru.gb.family_tree.family_tree.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyTreeItem<Human> {
     private static final AtomicInteger count = new AtomicInteger(1);
     private Integer id;
     private String name;
@@ -15,6 +17,7 @@ public class Human implements Serializable {
     private LocalDate birthDate, deathDate;
     private Human mother, father;
     private List<Human> children;
+
 
     public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father) {
         id = count.getAndIncrement();
@@ -70,7 +73,7 @@ public class Human implements Serializable {
         return period.getYears();
     }
 
-    public boolean addChildren(Human child){
+    public boolean addChild(Human child){
         if(!children.contains(child)){
             children.add(child);
             return true;

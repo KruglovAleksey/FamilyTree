@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException{
         //FamilyTree tree = loadTree();
-        FamilyTree tree = Tree();
+        FamilyTree<Human> tree = Tree();
         System.out.println(tree);
         //saveTree(tree);
 
@@ -22,26 +22,26 @@ public class Main {
         System.out.println(tree);
     }
 
-    static FamilyTree Tree(){
-        FamilyTree tree = new FamilyTree();
+    static FamilyTree<Human> Tree(){
+        FamilyTree<Human> tree = new FamilyTree<>();
         Human ira = new Human("Ира", Gender.Female, LocalDate.of(1964, 6,7));
         Human vadim = new Human("Вадим", Gender.Male, LocalDate.of(1966, 8,29));
         Human aleksey = new Human("Алексей", Gender.Male, LocalDate.of(1990, 4, 19));
-        ira.addChildren(aleksey);
-        vadim.addChildren(aleksey);
+        ira.addChild(aleksey);
+        vadim.addChild(aleksey);
         tree.addHuman(ira);
         tree.addHuman(aleksey);
         tree.addHuman(vadim);
         return tree;
     }
-    private static void saveTree(FamilyTree tree) throws IOException {
+    private static void saveTree(FamilyTree<Human> tree) throws IOException {
         String filePath = "src/ru/gb/family_tree/writer/tree.txt";
         FileHandler fileHandler = new FileHandler();
         fileHandler.save(tree, filePath);
     }
-    private static FamilyTree loadTree()throws IOException, ClassNotFoundException{
+    private static FamilyTree<Human> loadTree()throws IOException, ClassNotFoundException{
         String filePath = "src/ru/gb/family_tree/writer/tree.txt";
         FileHandler fileHandler = new FileHandler();
-        return (FamilyTree) fileHandler.read(filePath);
+        return (FamilyTree<Human>) fileHandler.read(filePath);
     }
 }
