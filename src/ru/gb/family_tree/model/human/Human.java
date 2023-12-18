@@ -1,6 +1,6 @@
-package ru.gb.family_tree.human;
+package ru.gb.family_tree.model.human;
 
-import ru.gb.family_tree.family_tree.FamilyTreeItem;
+import ru.gb.family_tree.model.family_tree.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,17 +10,16 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Human implements Serializable, FamilyTreeItem<Human> {
-    private static final AtomicInteger count = new AtomicInteger(1);
     private Integer id;
     private String name;
-    private Gender gender;
+    private String gender;
     private LocalDate birthDate, deathDate;
     private Human mother, father;
     private List<Human> children;
 
 
-    public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father) {
-        id = count.getAndIncrement();
+    public Human(String name, String gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father) {
+        id = - 1;
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
@@ -30,11 +29,11 @@ public class Human implements Serializable, FamilyTreeItem<Human> {
         children = new ArrayList<>();
     }
 
-    public Human(String name, Gender gender, LocalDate birthDate, Human mother, Human father) {
+    public Human(String name, String gender, LocalDate birthDate, Human mother, Human father) {
         this(name, gender, birthDate, null, mother, father);
     }
 
-    public Human(String name, Gender gender, LocalDate birthDate) {
+    public Human(String name, String gender, LocalDate birthDate) {
         this(name, gender, birthDate, null, null, null);
     }
 
@@ -42,8 +41,8 @@ public class Human implements Serializable, FamilyTreeItem<Human> {
     public int getId(){return id;}
     public void setName(String name) {this.name = name;}
     public String getName() {return name;}
-    public void setGender(Gender gender) {this.gender = gender;}
-    public Gender getGender() {return gender;}
+    public void setGender(String gender) {this.gender = gender;}
+    public String getGender() {return gender;}
     public Human getMother() {return mother;}
     public void setMother(Human mother) {this.mother = mother;}
     public Human getFather() {return father;}
@@ -81,10 +80,10 @@ public class Human implements Serializable, FamilyTreeItem<Human> {
     }
 
     public boolean addParent(Human parent){
-        if(parent.getGender().equals(Gender.Female)){
+        if(parent.getGender().equals("Ж")){
             setMother(parent);
             return true;
-        }else if(parent.getGender().equals(Gender.Male)){
+        }else if(parent.getGender().equals("М")){
             setFather(parent);
             return true;
         }

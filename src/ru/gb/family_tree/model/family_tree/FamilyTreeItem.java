@@ -1,12 +1,10 @@
-package ru.gb.family_tree.family_tree;
+package ru.gb.family_tree.model.family_tree;
 
-import ru.gb.family_tree.human.Human;
-
-import java.time.LocalDate;
 import java.util.List;
 
 public interface FamilyTreeItem<T> {
     int getId();
+    void setId(int id);
 
     String getName();
 

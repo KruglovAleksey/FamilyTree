@@ -1,6 +1,4 @@
-package ru.gb.family_tree.family_tree;
-
-import ru.gb.family_tree.human.Human;
+package ru.gb.family_tree.model.family_tree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<E extends  FamilyTreeItem<E>> implements Serializable, Iterable<E> {
+    private int humansId;
     private List<E> listTree;
 
     public FamilyTree() {
@@ -15,9 +14,10 @@ public class FamilyTree<E extends  FamilyTreeItem<E>> implements Serializable, I
     }
     public FamilyTree(List<E> listTree) {this.listTree = listTree;}
 
-    public boolean addHuman(E human){
+    public boolean add(E human){
         if(!listTree.contains(human)) {
             listTree.add(human);
+            human.setId(humansId++);
             addToParents(human);
             addToChildren(human);
             return true;
@@ -52,9 +52,9 @@ public class FamilyTree<E extends  FamilyTreeItem<E>> implements Serializable, I
         if(checkId(id)){
             return null;
         }
-        for(E e: listTree){
-            if (e.getId() == id){
-                return e;
+        for(E human: listTree){
+            if (human.getId() == id){
+                return human;
             }
         }
         return null;

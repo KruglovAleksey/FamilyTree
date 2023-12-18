@@ -1,15 +1,17 @@
 package ru.gb.family_tree;
 
-import ru.gb.family_tree.family_tree.FamilyTree;
-import ru.gb.family_tree.human.Gender;
-import ru.gb.family_tree.human.Human;
-import ru.gb.family_tree.writer.FileHandler;
+import ru.gb.family_tree.model.family_tree.FamilyTree;
+import ru.gb.family_tree.model.human.Human;
+import ru.gb.family_tree.model.writer.FileHandler;
+import ru.gb.family_tree.view.ConsoleUI;
+import ru.gb.family_tree.view.View;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException{
+    public static void main(String[] args){
+
         //FamilyTree tree = loadTree();
         FamilyTree<Human> tree = Tree();
         System.out.println(tree);
@@ -20,18 +22,20 @@ public class Main {
 
         tree.sortByAge();
         System.out.println(tree);
-    }
+        View view = new ConsoleUI();
+        view.start();
+   }
 
     static FamilyTree<Human> Tree(){
         FamilyTree<Human> tree = new FamilyTree<>();
-        Human ira = new Human("Ира", Gender.Female, LocalDate.of(1964, 6,7));
-        Human vadim = new Human("Вадим", Gender.Male, LocalDate.of(1966, 8,29));
-        Human aleksey = new Human("Алексей", Gender.Male, LocalDate.of(1990, 4, 19));
+        Human ira = new Human("Ира", "Ж", LocalDate.of(1964, 6,7));
+        Human vadim = new Human("Вадим", "М", LocalDate.of(1966, 8,29));
+        Human aleksey = new Human("Алексей", "М", LocalDate.of(1990, 4, 19));
         ira.addChild(aleksey);
         vadim.addChild(aleksey);
-        tree.addHuman(ira);
-        tree.addHuman(aleksey);
-        tree.addHuman(vadim);
+        tree.add(ira);
+        tree.add(aleksey);
+        tree.add(vadim);
         return tree;
     }
     private static void saveTree(FamilyTree<Human> tree) throws IOException {
