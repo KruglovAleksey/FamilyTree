@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Human implements Serializable, FamilyTreeItem<Human> {
     private Integer id;
