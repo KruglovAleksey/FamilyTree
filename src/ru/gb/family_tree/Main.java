@@ -12,16 +12,16 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args){
 
-        //FamilyTree tree = loadTree();
-        FamilyTree<Human> tree = Tree();
-        System.out.println(tree);
-        //saveTree(tree);
-
-        //tree.sortByName();
-        //System.out.println(tree);
-
-        tree.sortByAge();
-        System.out.println(tree);
+//        FamilyTree tree = loadTree();
+//        FamilyTree<Human> tree = Tree();
+//        System.out.println(tree);
+//        saveTree(tree);
+//
+//        tree.sortByName();
+//        System.out.println(tree);
+//
+//        tree.sortByAge();
+//        System.out.println(tree);
         View view = new ConsoleUI();
         view.start();
    }

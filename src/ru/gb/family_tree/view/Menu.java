@@ -14,6 +14,8 @@ public class Menu {
         commands.add(new PrintListTree(consoleUI));
         commands.add(new SortByName(consoleUI));
         commands.add(new SortByAge(consoleUI));
+        commands.add(new Save(consoleUI));
+        commands.add(new Load(consoleUI));
         commands.add(new Finish(consoleUI));
 
     }

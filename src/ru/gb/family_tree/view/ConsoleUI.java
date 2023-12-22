@@ -48,10 +48,10 @@ public class ConsoleUI implements View{
         System.out.println("Укажите дату рождения человека формата: ****-**-** гггг-мм-дд");
         String birthDateStr = scanner.nextLine();
         LocalDate birthDate = LocalDate.parse(birthDateStr);
-        System.out.println("Укажите id Отца");
+        System.out.println("Укажите id Матери");
         String idMotherStr = scanner.nextLine();
         int idMother = Integer.parseInt(idMotherStr);
-        System.out.println("Укажите id Матери");
+        System.out.println("Укажите id Отца");
         String idFatherStr = scanner.nextLine();
         int idFather = Integer.parseInt(idFatherStr);
         presenter.addHuman(name, gender, birthDate, idMother, idFather);
@@ -62,6 +62,13 @@ public class ConsoleUI implements View{
         presenter.printListTree();
     }
 
+    public void save(){
+        presenter.save();
+    }
+
+    public void load(){
+        presenter.load();
+    }
     public void sortByName(){
         presenter.sortByName();
     }
@@ -69,6 +76,7 @@ public class ConsoleUI implements View{
     public void sortByAge(){
         presenter.sortByAge();
     }
+
 
     public void finish(){
         System.out.println("Досвидание");

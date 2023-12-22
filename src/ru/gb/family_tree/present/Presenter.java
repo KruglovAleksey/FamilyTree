@@ -1,5 +1,6 @@
 package ru.gb.family_tree.present;
 
+import ru.gb.family_tree.model.human.Human;
 import ru.gb.family_tree.model.servis.Service;
 import ru.gb.family_tree.view.View;
 
@@ -27,10 +28,12 @@ public class Presenter {
 
     public void sortByName(){
         service.sortByName();
+        printListTree();
     }
 
     public void sortByAge(){
         service.sortBeAge();
+        printListTree();
     }
 
     public void save() {
@@ -40,4 +43,5 @@ public class Presenter {
     public void load() {
         service.load();
     }
+
 }
