@@ -4,16 +4,12 @@ package ru.gb.family_tree.model.servis;
 import ru.gb.family_tree.model.family_tree.FamilyTree;
 import ru.gb.family_tree.model.human.Human;
 import ru.gb.family_tree.model.writer.FileHandler;
-import ru.gb.family_tree.model.writer.Writable;
-
 
 import java.time.LocalDate;
 
 
 public class Service {
-    private Human human;
     private FamilyTree<Human> tree;
-    String filePath = "tree.txt";
 
     public Service(FamilyTree<Human> tree) {
         this.tree = tree;
@@ -24,12 +20,12 @@ public class Service {
     }
     public void save() {
         FileHandler fileHandler = new FileHandler();
-        fileHandler.save(tree, filePath);
+        fileHandler.save(tree);
     }
 
     public void load(){
         FileHandler fileHandler = new FileHandler();
-        tree = (FamilyTree<Human>) fileHandler.read(filePath);
+        tree = (FamilyTree<Human>) fileHandler.read();
     }
 
     public void addHuman(String name, String gender, LocalDate birthDate, int idMother, int idFather){

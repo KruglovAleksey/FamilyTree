@@ -3,7 +3,8 @@ package ru.gb.family_tree.model.writer;
 import java.io.*;
 
 public class FileHandler {
-    public boolean save(Serializable serializable, String filePath) {
+    String filePath = "tree.txt";
+    public boolean save(Serializable serializable) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             objectOutputStream.writeObject(serializable);
             return true;
@@ -13,7 +14,7 @@ public class FileHandler {
         }
     }
 
-    public Object read(String filePath){
+    public Object read(){
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))) {
             return objectInputStream.readObject();
         } catch (Exception e){
